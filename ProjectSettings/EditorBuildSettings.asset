@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 5dfabcaabca174f9a971f851e838b618
+  - enabled: 0
+    path: Assets/Fingers/Demo/DemoSceneMultiFingerTap.unity
+    guid: 34598f2799046a349bd3414246a5e89b
