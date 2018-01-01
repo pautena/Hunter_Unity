@@ -11,9 +11,12 @@ public class CameraGestures : MonoBehaviour {
 	public Transform target;
 	public float rotateVelocity=10f;
 	public float upVelocity=10f;
-	public float minAngle = 10f;
-	public float maxAngle = 80f;
 
+	public float minimumY = -60F;
+	public float maximumY = 60F;
+
+	private float rotationX = 0F;
+	private float rotationY = 0F;
 	private float deltaX;
 	private float deltaY;
 
@@ -50,23 +53,31 @@ public class CameraGestures : MonoBehaviour {
 	}
 		
 	private void Rotate(){
-		transform.RotateAround (target.position,Vector3.up,deltaX * Time.deltaTime * rotateVelocity);
+		float angle = deltaX * Time.deltaTime * rotateVelocity;
+		float newRotation = rotationX + angle;
+		transform.RotateAround (target.position,Vector3.up,angle);
+		rotationX = newRotation;
 	}
 
+	//Complete example with max and min angles
 	private void Up(){
-		Quaternion originalRotation = transform.rotation;
-		Vector3 originalPosition = transform.position;
+		float delta = deltaY * Time.deltaTime * rotateVelocity;
+		float newAngle = Camera.main.transform.eulerAngles.x - delta;
 
-		transform.RotateAround (target.position,Vector3.right,deltaY * Time.deltaTime * upVelocity);
+		if(Mathf.Ceil(newAngle) < maximumY  && Mathf.Floor(newAngle) > minimumY){
+			Camera.main.transform.RotateAround(target.position, Vector3.right, -delta );
+		}else{
+			float clampedVal = 0.0f;
 
-		Debug.Log (transform.rotation.x);
+			if(Mathf.Ceil(newAngle) > maximumY){
+				clampedVal =(maximumY - 0.001f) - Camera.main.transform.eulerAngles.x;
+				Camera.main.transform.RotateAround(target.position, Vector3.right, clampedVal * Mathf.Deg2Rad );
 
-		if (transform.rotation.x < Mathf.Deg2Rad * minAngle) {
-			transform.position = originalPosition;
-			transform.rotation = originalRotation;
-		} else if (transform.rotation.x > Mathf.Deg2Rad * maxAngle) {
-			transform.position = originalPosition;
-			transform.rotation = originalRotation;
+			}
+			else if(Mathf.Floor(newAngle) < minimumY){
+				clampedVal = (minimumY+0.001f) - Camera.main.transform.eulerAngles.x;
+				Camera.main.transform.RotateAround(target.position, Vector3.right, clampedVal * Mathf.Deg2Rad  );
+			}
 		}
 	}
 
@@ -101,5 +112,13 @@ public class CameraGestures : MonoBehaviour {
 	public void OrthographicCameraOptionChanged(bool orthographic)
 	{
 		Camera.main.orthographic = orthographic;
+	}
+
+	public static float ClampAngle (float angle, float min, float max){
+		if (angle < -360F)
+			angle += 360F;
+		if (angle > 360F)
+			angle -= 360F;
+		return Mathf.Clamp (angle, min, max);
 	}
 }

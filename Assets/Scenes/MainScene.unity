@@ -214,8 +214,8 @@ MonoBehaviour:
   target: {fileID: 352067561}
   rotateVelocity: 60
   upVelocity: 10
-  minAngle: 10
-  maxAngle: 25
+  minimumY: 10
+  maximumY: 40
 --- !u!1 &636288623
 GameObject:
   m_ObjectHideFlags: 0
