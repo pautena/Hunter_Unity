@@ -5,120 +5,102 @@ using DigitalRubyShared;
 
 public class CameraGestures : MonoBehaviour {
 	
+	public Transform Target;
+	public float distance = 10.0f;
+	public float minDistance=10.0f;
+	public float maxDistance=30.0f;
+
+	public float xSpeed = 250.0f;
+	public float ySpeed = 120.0f;
+	public float scaleSpeed=0.7f;
+
+	public float yMinLimit = -20.0f;
+	public float yMaxLimit = 80.0f;
+
+
+	private float x;
+	private float y;
+	private float scale;
 	private PanGestureRecognizer panGesture;
-	private Vector3 cameraAnimationTargetPosition;
+	private ScaleGestureRecognizer scaleGesture;
 
-	public Transform target;
-	public float rotateVelocity=10f;
-	public float upVelocity=10f;
-
-	public float minimumY = -60F;
-	public float maximumY = 60F;
-
-	private float rotationX = 0F;
-	private float rotationY = 0F;
-	private float deltaX;
-	private float deltaY;
-
-
-	private IEnumerator AnimationCoRoutine()
-	{
-		Vector3 start = Camera.main.transform.position;
-
-		// animate over 1/2 second
-		for (float accumTime = Time.deltaTime; accumTime <= 0.5f; accumTime += Time.deltaTime)
-		{
-			Camera.main.transform.position = Vector3.Lerp(start, cameraAnimationTargetPosition, accumTime / 0.5f);
-			yield return null;
-		}
+	void Awake(){
+		Vector3 angles = transform.eulerAngles;
+		x = angles.x;
+		y = angles.y;
+		scale=1.0f;
 	}
 
-	private void Start()
-	{
-		deltaX = 0.0f;
-		deltaY = 0.0f;
+	void Start(){
+
+		scaleGesture = new ScaleGestureRecognizer ();
+		scaleGesture.StateUpdated += Gesture_Updated;
+		FingersScript.Instance.AddGesture(scaleGesture);
+
 		panGesture = new PanGestureRecognizer();
 		panGesture.StateUpdated += PanGesture_Updated;
 		FingersScript.Instance.AddGesture(panGesture);
 
+		// the scale and pan can happen together
+		scaleGesture.AllowSimultaneousExecution(panGesture);
 	}
 
-	private void Update(){
-		if (deltaX != 0f || deltaY != 0f) {
-			transform.LookAt (target);
-			Rotate ();
-			Up ();
+	void LateUpdate(){
+		if(Target != null){
 			Zoom ();
+			Rotation ();
 		}
 	}
-		
-	private void Rotate(){
-		float angle = deltaX * Time.deltaTime * rotateVelocity;
-		float newRotation = rotationX + angle;
-		transform.RotateAround (target.position,Vector3.up,angle);
-		rotationX = newRotation;
-	}
 
-	//Complete example with max and min angles
-	private void Up(){
-		float delta = deltaY * Time.deltaTime * rotateVelocity;
-		float newAngle = Camera.main.transform.eulerAngles.x - delta;
 
-		if(Mathf.Ceil(newAngle) < maximumY  && Mathf.Floor(newAngle) > minimumY){
-			Camera.main.transform.RotateAround(target.position, Vector3.right, -delta );
-		}else{
-			float clampedVal = 0.0f;
+	private void Rotation(){
+		y = ClampAngle(y, yMinLimit, yMaxLimit);
 
-			if(Mathf.Ceil(newAngle) > maximumY){
-				clampedVal =(maximumY - 0.001f) - Camera.main.transform.eulerAngles.x;
-				Camera.main.transform.RotateAround(target.position, Vector3.right, clampedVal * Mathf.Deg2Rad );
-
-			}
-			else if(Mathf.Floor(newAngle) < minimumY){
-				clampedVal = (minimumY+0.001f) - Camera.main.transform.eulerAngles.x;
-				Camera.main.transform.RotateAround(target.position, Vector3.right, clampedVal * Mathf.Deg2Rad  );
-			}
-		}
+		Quaternion rotation = Quaternion.Euler(y, x, 0);
+		Vector3 position = rotation * (new Vector3(0.0f, 0.0f, -distance)) + Target.position;
+		transform.rotation = rotation;
+		transform.position = position;
 	}
 
 	private void Zoom(){
-	}
+		if (scale != 1.0f) {
+			float delta = (distance * scale) - distance;
+			distance += delta * scaleSpeed;
 
-	private void PanGesture_Updated(GestureRecognizer gesture)
-	{
-		if (panGesture.State == GestureRecognizerState.Executing)
-		{
-			StopAllCoroutines();
-
-			deltaX=panGesture.DeltaX;
-			deltaY = panGesture.DeltaY;
-			RotateCamera (panGesture.DeltaX);
-			ZoomCamera (panGesture.DeltaY);
-		}
-		else if (panGesture.State == GestureRecognizerState.Ended){
-			deltaX = 0f;
-			deltaY = 0f;
+			if (distance < minDistance) {
+				distance = minDistance;
+			} else if (distance > maxDistance) {
+				distance = maxDistance;
+			}
 		}
 	}
 
-	private void RotateCamera(float delta){
-
-	}
-
-	private void ZoomCamera(float delta){
-
-	}
-
-	public void OrthographicCameraOptionChanged(bool orthographic)
-	{
-		Camera.main.orthographic = orthographic;
-	}
-
-	public static float ClampAngle (float angle, float min, float max){
-		if (angle < -360F)
-			angle += 360F;
-		if (angle > 360F)
-			angle -= 360F;
+	private float ClampAngle(float angle, float min, float max){
+		if(angle < -360){
+			angle += 360;
+		}else if(angle > 360){
+			angle -= 360;
+		}
 		return Mathf.Clamp (angle, min, max);
 	}
+
+	private void PanGesture_Updated(GestureRecognizer gesture){
+		if (panGesture.State == GestureRecognizerState.Executing){
+			StopAllCoroutines();
+
+			x+=panGesture.DeltaX;
+			y+= panGesture.DeltaY;
+		}
+	}
+
+	private void Gesture_Updated(GestureRecognizer gesture){
+
+		if (scaleGesture.State == GestureRecognizerState.Executing) {
+			scale = 1.0f + (1.0f - scaleGesture.ScaleMultiplier);
+		} else {
+			scale = 1.0f;
+		}
+
+	}
+
 }
