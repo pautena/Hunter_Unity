@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class ShowAnimation : MonoBehaviour {
 
@@ -67,7 +69,9 @@ public class ShowAnimation : MonoBehaviour {
 	void AddAnim () 
 	{
 		ain = AinObjs [i].GetComponent<Animation>();
+#if UNITY_EDITOR
 		clips = AnimationUtility.GetAnimationClips (ain);
+#endif
 	}
 	void PlayAnim ()
 	{
