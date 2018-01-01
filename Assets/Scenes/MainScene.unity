@@ -212,10 +212,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 352067561}
-  Distance: 10
+  distance: 10
+  minDistance: 10
+  maxDistance: 30
   xSpeed: 2500
-  ySpeed: 1200
-  scaleSpeed: 0.1
+  ySpeed: 200
+  scaleSpeed: 0.3
   yMinLimit: 10
   yMaxLimit: 45
 --- !u!1 &636288623
