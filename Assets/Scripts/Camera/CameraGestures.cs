@@ -25,10 +25,12 @@ public class CameraGestures : MonoBehaviour {
 	private ScaleGestureRecognizer scaleGesture;
 
 	void Awake(){
-		Vector3 angles = transform.eulerAngles;
-		x = angles.x;
-		y = angles.y;
+		Vector3 angles = transform.rotation.eulerAngles;
+		x = angles.y;
+		y = angles.x;
 		scale=1.0f;
+
+		Debug.Log ("x: " + x + ", y: " + y + ", scale: " + scale);
 	}
 
 	void Start(){
