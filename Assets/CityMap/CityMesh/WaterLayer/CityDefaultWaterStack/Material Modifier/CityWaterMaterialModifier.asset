@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: CityWaterMaterialModifier
   m_EditorClassIdentifier: 
   Active: 1
-  _textureTop: 0
+  _textureTop: 1
   _useSatelliteTexture: 0
   _topMaterials:
   - {fileID: 2100000, guid: a9e2da8579f7c46ac8d73f84d978fb74, type: 2}
