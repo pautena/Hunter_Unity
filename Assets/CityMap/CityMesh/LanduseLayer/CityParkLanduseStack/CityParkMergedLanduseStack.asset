@@ -14,6 +14,7 @@ MonoBehaviour:
   _moveFeaturePositionTo: 0
   MeshModifiers:
   - {fileID: 11400000, guid: 7a4573d4268c04f169488aa488a6ae5e, type: 2}
+  - {fileID: 11400000, guid: 733dde4dc1e4e4ee995453434d3bb9e5, type: 2}
   - {fileID: 11400000, guid: ea4c637628d144e8d941bdbe6119bd68, type: 2}
   GoModifiers:
   - {fileID: 11400000, guid: 8b9455e79c91e4d28a52bb0b57050c2f, type: 2}
