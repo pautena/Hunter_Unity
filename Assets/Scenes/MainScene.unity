@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 1
-  m_FogColor: {r: 0.7058824, g: 0.8862745, b: 1, a: 1}
+  m_FogColor: {r: 0.37647063, g: 0.62352943, b: 0.854902, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 100
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.83426183, g: 0.84982777, b: 0.8889762, a: 1}
+  m_IndirectSpecularColor: {r: 0.29791573, g: 0.49619198, b: 0.7345025, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -328,8 +328,8 @@ Camera:
   m_GameObject: {fileID: 504905292}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.3764706, g: 0.62352943, b: 0.85490197, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
