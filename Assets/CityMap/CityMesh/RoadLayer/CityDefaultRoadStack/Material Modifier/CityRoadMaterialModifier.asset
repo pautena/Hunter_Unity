@@ -9,13 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d86f7dc89b3e33408563e4ada9d1c74, type: 3}
-  m_Name: CityBuildingMaterialModifier
+  m_Name: CityRoadMaterialModifier
   m_EditorClassIdentifier: 
   Active: 1
   _textureTop: 1
   _useSatelliteTexture: 0
   _topMaterials:
-  - {fileID: 2100000, guid: c97bbf8f38b0a4694b8245185679fa1a, type: 2}
-  _textureSides: 1
-  _sideMaterials:
-  - {fileID: 2100000, guid: c97bbf8f38b0a4694b8245185679fa1a, type: 2}
+  - {fileID: 2100000, guid: e6f470e47530c4d88aecd3e6d5b52334, type: 2}
+  _textureSides: 0
+  _sideMaterials: []

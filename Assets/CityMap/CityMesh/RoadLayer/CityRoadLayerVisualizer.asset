@@ -9,11 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 120e43a7012622e49aca0c9217acd1f9, type: 3}
-  m_Name: CityBuildingLayerVisualizer
+  m_Name: CityRoadLayerVisualizer
   m_EditorClassIdentifier: 
   Active: 1
   _classificationKey: 
-  _key: building
+  _key: road
   Filters: []
-  _defaultStack: {fileID: 11400000, guid: 4c7741eeef1494350aa85bd60c1b9c66, type: 2}
-  Stacks: []
+  _defaultStack: {fileID: 11400000, guid: 6d6b2c0846d73471291e099d7fb06ae4, type: 2}
+  Stacks:
+  - Type: footway
+    Stack: {fileID: 11400000, guid: fd91dff71d7844e0a832d6503e130b26, type: 2}

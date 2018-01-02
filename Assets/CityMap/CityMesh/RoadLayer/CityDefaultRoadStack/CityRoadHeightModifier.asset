@@ -8,8 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf1a49b7a5d29964093712def3d56475, type: 3}
-  m_Name: CityBlueBuildingUVModifier
+  m_Script: {fileID: 11500000, guid: a7dfb85d33966074ebf2acd2de263474, type: 3}
+  m_Name: CityRoadHeightModifier
   m_EditorClassIdentifier: 
   Active: 1
-  UseSatelliteRoof: 0
+  _flatTops: 0
+  _forceHeight: 1
+  _height: 0.25
+  _createSideWalls: 0
