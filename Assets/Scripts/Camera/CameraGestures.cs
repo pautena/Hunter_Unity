@@ -29,8 +29,6 @@ public class CameraGestures : MonoBehaviour {
 		x = angles.y;
 		y = angles.x;
 		scale=1.0f;
-
-		Debug.Log ("x: " + x + ", y: " + y + ", scale: " + scale);
 	}
 
 	void Start(){

@@ -11,3 +11,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Fingers/Demo/DemoSceneMultiFingerTap.unity
     guid: 34598f2799046a349bd3414246a5e89b
+  - enabled: 1
+    path: Assets/Scenes/HistoryScene.unity
+    guid: d81e58a230d1c45c899b98c2c27750fa
+  - enabled: 1
+    path: Assets/Scenes/LoginScene.unity
+    guid: b203ca446f915450e9ef134bb1d6331c
