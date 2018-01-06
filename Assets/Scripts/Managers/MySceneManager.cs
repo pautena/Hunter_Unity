@@ -19,8 +19,22 @@ public class MySceneManager : MonoBehaviour {
 
 	public void StartHistoryScene(){
 		Debug.Log ("StartHistoryScene");
+		StartSceneWithAnimation ("HistoryScene");
+	}
+
+	public void StartLoginScene(){
+		Debug.Log ("StartLoginScene");
+		StartSceneWithAnimation ("LoginScene");
+	}
+
+	public void StartMainScene(){
+		Debug.Log ("StartLoginScene");
+		StartScene ("MainScene");
+	}
+
+	private void StartSceneWithAnimation(string name){
 		StartCoroutine (imageFade.FadeOut ());
-		StartCoroutine(StartSceneWithDelay("HistoryScene",imageFade.duration));
+		StartCoroutine(StartSceneWithDelay(name,imageFade.duration));
 	}
 
 	private IEnumerator StartSceneWithDelay(string name, float delay){
