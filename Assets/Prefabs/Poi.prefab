@@ -72,9 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4545204045048496}
   - component: {fileID: 114808136939600298}
-  - component: {fileID: 114546660494112820}
   - component: {fileID: 136629337007921352}
-  - component: {fileID: 114006751287409592}
   m_Layer: 0
   m_Name: Poi
   m_TagString: Poi
@@ -576,28 +574,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762970500880434}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114006751287409592
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1251547392347470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2d6aefde4eff40eb9e9b27ea02b2966, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114546660494112820
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1251547392347470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2d6aefde4eff40eb9e9b27ea02b2966, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114808136939600298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -631,7 +607,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251547392347470}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 5
   m_Height: 10
