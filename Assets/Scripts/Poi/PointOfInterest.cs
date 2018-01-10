@@ -36,4 +36,8 @@ public class PointOfInterest : MonoBehaviour {
 	private void SetEnabled(bool enabled){
 		enabledGameObject.SetActive (enabled);
 	}
+
+	public void OnClick(){
+		Debug.Log ("OnClick poi");
+	}
 }
