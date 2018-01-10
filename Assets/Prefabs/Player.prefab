@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 114957968012105356}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 4683756915416246}
   - component: {fileID: 120624378357402654}
   - component: {fileID: 114817642893196398}
+  - component: {fileID: 114028051775957174}
   m_Layer: 0
   m_Name: GroundCircle
   m_TagString: Untagged
@@ -1579,6 +1580,21 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!114 &114028051775957174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371893066310394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea9570f7320f42b4873c2405f48ab40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCircle: {fileID: 114817642893196398}
+  minRadius: 0
+  maxRadius: 2
+  velolcity: 1
 --- !u!114 &114562920058808578
 MonoBehaviour:
   m_ObjectHideFlags: 1

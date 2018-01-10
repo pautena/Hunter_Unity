@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PointOfInterest : MonoBehaviour {
 
 	public bool enabled=true;
-
 	public GameObject enabledGameObject;
+
+	private Collider collider;
 
 	// Use this for initialization
 	void Start () {
-		
+		collider = GetComponent<Collider> ();		
 	}
 	
 	// Update is called once per frame
@@ -34,10 +36,24 @@ public class PointOfInterest : MonoBehaviour {
 	}
 
 	private void SetEnabled(bool enabled){
+		this.enabled = enabled;
 		enabledGameObject.SetActive (enabled);
 	}
 
 	public void OnClick(){
-		Debug.Log ("OnClick poi");
+		if (PlayerInsideCollider () && enabled) {
+			print("player is inside collider");
+			GameObject prizePanel = GameObject.FindGameObjectWithTag ("PanelPrize");
+
+			if (prizePanel != null) {
+				PrizePanelManager prizePanelManager = prizePanel.GetComponent<PrizePanelManager> ();
+				prizePanelManager.OnCanWinPrize ();
+			}
+		}
+	}
+
+	private bool PlayerInsideCollider(){
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
+		return player != null && collider.bounds.Contains (player.transform.position);
 	}
 }
