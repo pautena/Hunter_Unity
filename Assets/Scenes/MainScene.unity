@@ -1228,6 +1228,45 @@ Transform:
   m_Father: {fileID: 333693371}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1933499709 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1371893066310394, guid: 756cc610da13b44c29a7f2169399a517,
+    type: 2}
+  m_PrefabInternal: {fileID: 1382675121}
+--- !u!136 &1933499710
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1933499709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1933499711 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114817642893196398, guid: 756cc610da13b44c29a7f2169399a517,
+    type: 2}
+  m_PrefabInternal: {fileID: 1382675121}
+  m_Script: {fileID: 11500000, guid: 1a7c5cf85936c44119e504be59465416, type: 3}
+--- !u!114 &1933499713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1933499709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea9570f7320f42b4873c2405f48ab40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCircle: {fileID: 1933499711}
+  minRadius: 0
+  maxRadius: 2
+  velolcity: 1
 --- !u!1001 &1967849740
 Prefab:
   m_ObjectHideFlags: 0
