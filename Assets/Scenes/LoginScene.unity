@@ -1757,7 +1757,7 @@ MonoBehaviour:
   logoutButton: {fileID: 833612837}
   emailInputField: {fileID: 1863893696}
   passwordInputField: {fileID: 68758786}
-  progressVelocity: 6
+  progressVelocity: 0.5
 --- !u!114 &1700296804
 MonoBehaviour:
   m_ObjectHideFlags: 0
