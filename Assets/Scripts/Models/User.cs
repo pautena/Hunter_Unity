@@ -3,12 +3,10 @@
 namespace Models
 {
 	public class User{
-		public string email;
-		public string password;
+		public string secretToken;
 
-		public User (string email,string password){
-			this.email = email;
-			this.password = password;
+		public User (string secretToken){
+			this.secretToken = secretToken;
 		}
 	}
 }

@@ -37,10 +37,10 @@ namespace Models.Managers{
 		}
 
 
-		public void Login(string email,string password){
+		public void Login(string secretToken){
 			Debug.Log ("start Login");
 			//TODO: Login into nem	
-			user = new User(email,password);
+			user = new User(secretToken);
 			Save ();
 		}
 

@@ -10,8 +10,7 @@ public class LoginManager : MonoBehaviour {
 	public Canvas loginInputCanvas;
 	public Button logoutButton;
 
-	public InputField emailInputField;
-	public InputField passwordInputField;
+	public InputField secretTokenInputField;
 
 	public float progressVelocity=6f;
 
@@ -56,21 +55,16 @@ public class LoginManager : MonoBehaviour {
 
 	public void Login(){
 		Debug.Log ("Login");
-		string email = emailInputField.text;
-		string password = passwordInputField.text;
+		string secretToken = secretTokenInputField.text;
 
-		if (email == "") {
-			Debug.LogError ("email is empty");
-			return;
-		}
-
-		if (password == "") {
-			Debug.LogError ("password is empty");
+		if (secretToken == "") {
+			Debug.LogError ("secretToken is empty");
 			return;
 		}
 
 
-		userManager.Login (email, password);
+
+		userManager.Login (secretToken);
 		SetupVisibleUI ();
 	}
 
