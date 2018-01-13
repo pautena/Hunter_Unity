@@ -10,7 +10,7 @@ public class PointOfInterest : MonoBehaviour,IFeaturePropertySettable {
 	public GameObject enabledGameObject;
 
 	private Collider collider;
-	public int id = -1;
+	public string id = "-1";
 
 	// Use this for initialization
 	void Start () {
@@ -60,6 +60,6 @@ public class PointOfInterest : MonoBehaviour,IFeaturePropertySettable {
 	}
 
 	public void Set(Dictionary<string, object> props){
-		this.id = (int) props ["id"];
+		this.id =  props ["id"] as string;
 	}
 }

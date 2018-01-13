@@ -20,6 +20,8 @@ namespace NemApi{
 
 		private void RequestPois(){
 
+			nemApi.GetMosaicDefinition ();
+
 		}
 	}
 }

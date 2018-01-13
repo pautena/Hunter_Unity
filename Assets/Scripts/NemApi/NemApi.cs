@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 namespace NemApi{
 	public class NemApi : MonoBehaviour {
+
+		public string baseUrl = "bigalice2.nem.ninja";
+		public int port = 7890;
+		public string nemNamespace = "hunter";
+		public string address ="TBWHKDPRWQYD5JFVATPOOBJZQDFXZ3LDHYYBJHF3";
+
+		private string mosaicDefinitionPath = "account/mosaic/definition/page";
 
 		// Use this for initialization
 		void Start () {
@@ -12,6 +20,20 @@ namespace NemApi{
 
 		// Update is called once per frame
 		void Update () {
+
+		}
+
+		public void GetMosaicDefinition(){
+
+			string url = "http://" + baseUrl + ":" + port + "/" + mosaicDefinitionPath 
+				+ "?address=" + address + "&parent=" + nemNamespace;
+
+			ObservableWWW.Get(url)
+				.Subscribe(
+					x => Debug.Log(x), // onSuccess
+					ex => Debug.LogException(ex)); // onError
+
+
 
 		}
 	}
