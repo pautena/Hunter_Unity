@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Mapbox.Unity.MeshGeneration.Interfaces;
 
-public class PointOfInterest : MonoBehaviour {
+public class PointOfInterest : MonoBehaviour,IFeaturePropertySettable {
 
 	public bool enabled=true;
 	public GameObject enabledGameObject;
 
 	private Collider collider;
+	public int id = -1;
 
 	// Use this for initialization
 	void Start () {
@@ -55,5 +57,9 @@ public class PointOfInterest : MonoBehaviour {
 	private bool PlayerInsideCollider(){
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
 		return player != null && collider.bounds.Contains (player.transform.position);
+	}
+
+	public void Set(Dictionary<string, object> props){
+		this.id = (int) props ["id"];
 	}
 }
