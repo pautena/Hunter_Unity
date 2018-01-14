@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using Poi;
+using NemApi.Models;
 
 namespace NemApi{
 	public class NemApi : MonoBehaviour {
@@ -30,10 +32,16 @@ namespace NemApi{
 
 			ObservableWWW.Get(url)
 				.Subscribe(
-					x => Debug.Log(x), // onSuccess
+					this.OnLoadMosaicsSuccess, // onSuccess
 					ex => Debug.LogException(ex)); // onError
 
 
+
+		}
+
+		public void OnLoadMosaicsSuccess(string response){
+			MosaicGroup mosaicGroup = JsonUtility.FromJson<MosaicGroup> (response);
+			new PoiManager ().UpdatePois (mosaicGroup);
 
 		}
 	}

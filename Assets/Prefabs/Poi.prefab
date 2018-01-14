@@ -71,8 +71,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4545204045048496}
-  - component: {fileID: 114808136939600298}
   - component: {fileID: 136629337007921352}
+  - component: {fileID: 114741339007360884}
   m_Layer: 0
   m_Name: Poi
   m_TagString: Poi
@@ -574,7 +574,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762970500880434}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114808136939600298
+--- !u!114 &114741339007360884
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -582,11 +582,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1251547392347470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5010b4e13fe24facad9dfc1e56cc453, type: 3}
+  m_Script: {fileID: 11500000, guid: 0816c09b829db486c8b3046b83773675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabled: 0
+  poiEnabled: 0
   enabledGameObject: {fileID: 1904733874496760}
+  id: -1
 --- !u!136 &136256591026277002
 CapsuleCollider:
   m_ObjectHideFlags: 1
