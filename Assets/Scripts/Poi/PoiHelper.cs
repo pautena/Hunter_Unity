@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using Mapbox.Unity.MeshGeneration.Interfaces;
 using NemApi.Models;
-
 namespace Poi{
 	public class PoiHelper : MonoBehaviour,IFeaturePropertySettable {
 
 		public bool poiEnabled=true;
-		public GameObject enabledGameObject;
+		public Material poiEnabledMaterial;
+		public Material poiDisabledMaterial;
+		public MeshRenderer meshRenderer;
+		public ParticleSystem embersParticleSystem;
 
 		private Collider poiCollider;
 		public string id = "-1";
@@ -21,12 +23,7 @@ namespace Poi{
 
 		// Update is called once per frame
 		void Update () {
-
-			if (poiEnabled) {
-				Enable ();
-			} else {
-				Disable ();
-			}
+			SetupEnabled ();
 		}
 
 		public void Enable(Mosaic mosaic){
@@ -35,18 +32,28 @@ namespace Poi{
 			SetEnabled(true);
 		}
 
+		private void SetupEnabled(){
+			if (poiEnabled) {
+				Enable ();
+			} else {
+				Disable ();
+			}
+		}
+
 
 		public void Enable(){
-			enabledGameObject.SetActive (true);
+			meshRenderer.material=poiEnabledMaterial;
+			embersParticleSystem.Play ();
 		}
 
 		public void Disable(){
-			enabledGameObject.SetActive (false);
+			meshRenderer.material=poiDisabledMaterial;
+			embersParticleSystem.Stop ();
 		}
 
 		private void SetEnabled(bool poiEnabled){
 			this.poiEnabled = poiEnabled;
-			enabledGameObject.SetActive (poiEnabled);
+			SetupEnabled ();
 		}
 
 		public void OnClick(){

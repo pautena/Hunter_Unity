@@ -219,6 +219,10 @@ Prefab:
       propertyPath: _zoom
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1880728329263474, guid: 384bff65ff86247269bdb15e6da884ec, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 384bff65ff86247269bdb15e6da884ec, type: 2}
   m_IsPrefabParent: 0
@@ -677,6 +681,7 @@ GameObject:
   - component: {fileID: 504905294}
   - component: {fileID: 504905293}
   - component: {fileID: 504905297}
+  - component: {fileID: 504905298}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -767,6 +772,45 @@ MonoBehaviour:
   scaleSpeed: 0.3
   yMinLimit: 10
   yMaxLimit: 45
+--- !u!114 &504905298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 504905292}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a773099f140e846f7835d27351846623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweakMode: 0
+  screenBlendMode: 1
+  hdr: 0
+  sepBlurSpread: 2.5
+  quality: 1
+  bloomIntensity: 0.5
+  bloomThreshhold: 1
+  bloomThreshholdColor: {r: 1, g: 1, b: 1, a: 1}
+  bloomBlurIterations: 2
+  hollywoodFlareBlurIterations: 2
+  flareRotation: 0
+  lensflareMode: 1
+  hollyStretchWidth: 2.5
+  lensflareIntensity: 0
+  lensflareThreshhold: 0.3
+  lensFlareSaturation: 0.75
+  flareColorA: {r: 0.4, g: 0.4, b: 0.8, a: 0.75}
+  flareColorB: {r: 0.4, g: 0.8, b: 0.8, a: 0.75}
+  flareColorC: {r: 0.8, g: 0.4, b: 0.8, a: 0.75}
+  flareColorD: {r: 0.8, g: 0.4, b: 0, a: 0.75}
+  blurWidth: 1
+  lensFlareVignetteMask: {fileID: 2800000, guid: 95ef4804fe0be4c999ddaa383536cde8,
+    type: 3}
+  lensFlareShader: {fileID: 4800000, guid: 459fe69d2f6d74ddb92f04dbf45a866b, type: 3}
+  screenBlendShader: {fileID: 4800000, guid: 7856cbff0a0ca45c787d5431eb805bb0, type: 3}
+  blurAndFlaresShader: {fileID: 4800000, guid: be6e39cf196f146d5be72fbefb18ed75, type: 3}
+  brightPassFilterShader: {fileID: 4800000, guid: 0aeaa4cb29f5d4e9c8455f04c8575c8c,
+    type: 3}
 --- !u!1 &636288623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,6 +1214,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4168543466536954, guid: 756cc610da13b44c29a7f2169399a517,
     type: 2}
   m_PrefabInternal: {fileID: 1382675121}
+--- !u!1001 &1373038482
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4188213788791648, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188213788791648, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188213788791648, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188213788791648, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188213788791648, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188213788791648, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188213788791648, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188213788791648, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1382675121
 Prefab:
   m_ObjectHideFlags: 0
