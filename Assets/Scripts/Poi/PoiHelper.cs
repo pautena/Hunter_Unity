@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Mapbox.Unity.MeshGeneration.Interfaces;
 using NemApi.Models;
+using UnityEngine.UI;
 
 namespace Poi{
 	public class PoiHelper : MonoBehaviour,IFeaturePropertySettable {
@@ -14,6 +15,9 @@ namespace Poi{
 		private Collider poiCollider;
 		public string id = "-1";
 		public Canvas poiUI;
+		public Image poiImage;
+		public Text title;
+		public Text description;
 
 		// Use this for initialization
 		void Start () {
@@ -33,6 +37,22 @@ namespace Poi{
 		public void Enable(Mosaic mosaic){
 			//TODO: Check if can enable with this mosaic;
 			SetEnabled(true);
+			SetupMosaic (mosaic);
+		}
+
+		private void SetupMosaic(Mosaic mosaic){
+
+			PoiDescription poiDescription = JsonUtility.FromJson<PoiDescription> (mosaic.description);
+			StartCoroutine (LoadImage (poiDescription.img_url));
+			title.text = poiDescription.name;
+			description.text = poiDescription.description;
+		}
+
+		IEnumerator LoadImage(string url)
+		{
+			WWW www = new WWW(url);
+			yield return www;
+			poiImage.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
 		}
 
 
@@ -56,20 +76,25 @@ namespace Poi{
 		}
 
 		private void ShowPrize(){
-			Camera mainCamera = Camera.main;
-			CameraToTarget cameraToTarget = mainCamera.GetComponent<CameraToTarget> ();
-			if (cameraToTarget != null) {
-				ShowPoiUI ();
-				cameraToTarget.SetTarget (transform);
-			}
+			CameraToTarget cameraToTarget = Camera.main.GetComponent<CameraToTarget> ();
+			ShowPoiUI ();
+			cameraToTarget.SetTarget (transform);
+		}
+
+		public void HidePrize(){
+			CameraToTarget cameraToTarget = Camera.main.GetComponent<CameraToTarget> ();
+			cameraToTarget.RemoveTarget ();
+			HidePoiUI ();
 		}
 
 		public void ShowPoiUI(){
+			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<MainUIManager> ().Hide ();
 			poiUI.enabled = true;
 		}
 
 		public void HidePoiUI(){
 			poiUI.enabled = false;
+			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<MainUIManager> ().Show ();
 		}
 
 		private bool PlayerInsideCollider(){
