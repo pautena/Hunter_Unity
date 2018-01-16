@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: CityPoiPrefabModifier
   m_EditorClassIdentifier: 
   Active: 1
-  _prefab: {fileID: 1058597953999214, guid: bc51802a905c0460f9f99d1909f7a246, type: 2}
+  _prefab: {fileID: 1850780577469668, guid: 74e52fea6e03841cda2943c4f55e9237, type: 2}
   _scaleDownWithWorld: 1
