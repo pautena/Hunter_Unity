@@ -13,6 +13,7 @@ namespace Poi{
 
 		private Collider poiCollider;
 		public string id = "-1";
+		public Canvas poiUI;
 
 		// Use this for initialization
 		void Start () {
@@ -30,7 +31,6 @@ namespace Poi{
 		}
 
 		public void Enable(Mosaic mosaic){
-			Debug.Log ("try to enable " + id);
 			//TODO: Check if can enable with this mosaic;
 			SetEnabled(true);
 		}
@@ -50,15 +50,26 @@ namespace Poi{
 		}
 
 		public void OnClick(){
-			if (PlayerInsideCollider () && enabled) {
-				print("player is inside collider");
-				GameObject prizePanel = GameObject.FindGameObjectWithTag ("PanelPrize");
-
-				if (prizePanel != null) {
-					PrizePanelManager prizePanelManager = prizePanel.GetComponent<PrizePanelManager> ();
-					prizePanelManager.OnCanWinPrize ();
-				}
+			if (/*PlayerInsideCollider () &&*/ poiEnabled) {
+				ShowPrize ();
 			}
+		}
+
+		private void ShowPrize(){
+			Camera mainCamera = Camera.main;
+			CameraToTarget cameraToTarget = mainCamera.GetComponent<CameraToTarget> ();
+			if (cameraToTarget != null) {
+				ShowPoiUI ();
+				cameraToTarget.SetTarget (transform);
+			}
+		}
+
+		public void ShowPoiUI(){
+			poiUI.enabled = true;
+		}
+
+		public void HidePoiUI(){
+			poiUI.enabled = false;
 		}
 
 		private bool PlayerInsideCollider(){

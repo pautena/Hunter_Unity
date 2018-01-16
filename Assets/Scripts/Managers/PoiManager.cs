@@ -14,7 +14,8 @@ namespace Poi{
 		}
 
 		public GameObject FindPoiById(string id){
-			return GameObject.Find (GetPoiName(id));
+			string name = GetPoiName (id);
+			return GameObject.Find (name);
 		}
 
 		public void SetPoiName(GameObject gameOjbect,string id){
@@ -29,17 +30,21 @@ namespace Poi{
 		}
 
 		public void UpdatePoi(Mosaic mosaic){
-
 			try{
 				PoiDescription description = JsonUtility.FromJson<PoiDescription> (mosaic.description);
 
-				PoiHelper poiHelper =new PoiManager().FindPoiById(description.poi_id).GetComponent<PoiHelper>();
-				poiHelper.Enable(mosaic);
+				GameObject poiGameObject = new PoiManager().FindPoiById(description.poi_id);
+
+				if(poiGameObject!=null){
+					PoiHelper poiHelper =poiGameObject.GetComponent<PoiHelper>();
+
+					poiHelper.Enable(mosaic);
+				}else{
+					Debug.LogError("poi "+description.poi_id+" not found");
+				}
 
 			}catch(ArgumentException e){
-				Debug.LogWarning (e.Message+", description: "+mosaic.description);
-			}catch(NullReferenceException e){
-				Debug.LogWarning ("This poi haven't attached a PoiHelper component");
+				Debug.LogError (e.Message+", description: "+mosaic.description);
 			}
 		}
 

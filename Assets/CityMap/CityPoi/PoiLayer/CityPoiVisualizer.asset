@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   _classificationKey: 
-  _key: poi_label
+  _key: poi-tileset
   Filters: []
   _defaultStack: {fileID: 11400000, guid: 9617bba7434b741a6abdfd9fb30447b2, type: 2}
   Stacks: []

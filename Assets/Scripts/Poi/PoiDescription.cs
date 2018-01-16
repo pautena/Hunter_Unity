@@ -8,10 +8,9 @@ namespace Poi{
 		public string description;
 		public string img_url;
 
-		public string ToString(){
+		override public string ToString(){
 			return "poi_id: "+poi_id+", name: "+name;
 		}
-
 	}
 }
 

@@ -9,7 +9,7 @@ namespace NemApi{
 
 		// Use this for initialization
 		void Start () {
-			RequestPois ();
+			Invoke ("RequestPois", 2);
 
 		}
 
@@ -19,7 +19,6 @@ namespace NemApi{
 		}
 
 		private void RequestPois(){
-
 			nemApi.GetMosaicDefinition ();
 
 		}
