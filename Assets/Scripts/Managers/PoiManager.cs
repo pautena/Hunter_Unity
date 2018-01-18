@@ -31,7 +31,7 @@ namespace Poi{
 
 		public void UpdatePoi(Mosaic mosaic){
 			try{
-				PoiDescription description = JsonUtility.FromJson<PoiDescription> (mosaic.description);
+				MosaicJsonDescription description = mosaic.GetJsonDescription();
 
 				GameObject poiGameObject = new PoiManager().FindPoiById(description.poi_id);
 

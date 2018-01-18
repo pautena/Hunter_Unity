@@ -42,8 +42,8 @@ namespace Poi{
 
 		private void SetMosaic(Mosaic mosaic){
 			this.mosaic = mosaic;
-			PoiDescription poiDescription = JsonUtility.FromJson<PoiDescription> (mosaic.description);
-			StartCoroutine (LoadImage (poiDescription.img_url));
+			MosaicJsonDescription poiDescription = mosaic.GetJsonDescription ();
+			StartCoroutine (ImageUtils.LoadImage (poiDescription.img_url,poiImage));
 			title.text = poiDescription.name;
 			description.text = poiDescription.description;
 			SetupUnities (mosaic);
@@ -59,13 +59,6 @@ namespace Poi{
 			if (mosaic != null) {
 				StartCoroutine(GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ().pick (mosaic));
 			}
-		}
-
-		IEnumerator LoadImage(string url)
-		{
-			WWW www = new WWW(url);
-			yield return www;
-			poiImage.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
 		}
 
 		private void SetupEnabled(){

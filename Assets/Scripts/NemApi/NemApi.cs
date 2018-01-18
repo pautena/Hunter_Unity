@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using Poi;
 using NemApi.Models;
+using System;
 
 namespace NemApi{
 	public class NemApi : MonoBehaviour {
@@ -14,6 +15,7 @@ namespace NemApi{
 		public string address ="TBWHKDPRWQYD5JFVATPOOBJZQDFXZ3LDHYYBJHF3";
 
 		private string mosaicDefinitionPath = "account/mosaic/definition/page";
+		private string mosaicOwnerPath="account/mosaic/owned";
 
 		// Use this for initialization
 		void Start () {
@@ -25,24 +27,45 @@ namespace NemApi{
 
 		}
 
-		public void GetMosaicDefinition(){
+		public void GetMosaicDefinition(Action<MosaicGroup> callback){
 
 			string url = "http://" + baseUrl + ":" + port + "/" + mosaicDefinitionPath 
 				+ "?address=" + address + "&parent=" + nemNamespace;
 
 			ObservableWWW.Get(url)
 				.Subscribe(
-					this.OnLoadMosaicsSuccess, // onSuccess
+					x => this.OnLoadMosaicsSuccess(x,callback), // onSuccess
 					ex => Debug.LogException(ex)); // onError
 
 
 
 		}
 
-		public void OnLoadMosaicsSuccess(string response){
+		public void OnLoadMosaicsSuccess(string response,Action<MosaicGroup> callback){
 			MosaicGroup mosaicGroup = JsonUtility.FromJson<MosaicGroup> (response);
-			new PoiManager ().UpdatePois (mosaicGroup);
+			callback.Invoke (mosaicGroup);
 
+		}
+
+		public void LoadOwnedMosaics(Action<OwnedMosaic[]> callback){
+			string address = "TAUYBFWNP3D26H3UEG2ED6T6DI6YMN3EGEJ3LKFE";//TODO: Remove and pick from user info
+			string url = "http://" + baseUrl + ":" + port + "/" + mosaicOwnerPath
+			             + "?address=" + address;
+
+
+			Debug.Log ("LoadOwnedMosaics. url: "+url);
+
+			ObservableWWW.Get(url)
+				.Subscribe(
+					x => this.OnLoadOwnerMosaicsSuccess(x,callback), // onSuccess
+					ex => Debug.LogException(ex)); // onError
+		}
+
+		public void OnLoadOwnerMosaicsSuccess(string response,Action<OwnedMosaic[]> callback){
+			Debug.Log ("response: " + response);
+			OwnedMosaics responseOwnedMosaics = JsonUtility.FromJson<OwnedMosaics> (response);
+			OwnedMosaic[] ownedMosaics = responseOwnedMosaics.FindMosaicsByNamespace (nemNamespace);
+			callback.Invoke (ownedMosaics);
 		}
 	}
 }

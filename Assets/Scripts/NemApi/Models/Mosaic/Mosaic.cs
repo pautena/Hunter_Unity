@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace NemApi.Models{
 	[System.Serializable]
@@ -25,6 +26,11 @@ namespace NemApi.Models{
 		public int GetInitialSupply(){
 			return Int32.Parse(GetProperty ("initialSupply"));
 		}
+
+		public MosaicJsonDescription GetJsonDescription(){
+			return JsonUtility.FromJson<MosaicJsonDescription> (description);
+		}
+
 	}
 }
 

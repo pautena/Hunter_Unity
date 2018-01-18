@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NemApi.Models;
+using Poi;
 
 namespace NemApi{
 	public class LoadPois : MonoBehaviour {
@@ -19,8 +21,11 @@ namespace NemApi{
 		}
 
 		private void RequestPois(){
-			nemApi.GetMosaicDefinition ();
+			nemApi.GetMosaicDefinition (this.OnGetMosaicDefinition);
+		}
 
+		public void OnGetMosaicDefinition(MosaicGroup mosaicGroup){
+			new PoiManager ().UpdatePois (mosaicGroup);
 		}
 	}
 }

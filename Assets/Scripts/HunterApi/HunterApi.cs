@@ -21,7 +21,8 @@ public class HunterApi : MonoBehaviour {
 	public IEnumerator pick(Mosaic mosaic){
 		string url = baseUrl + "/bounties/pick";
 
-		string bodyJsonString = "name=pixel&address=TAUYBF-WNP3D2-6H3UEG-2ED6T6-DI6YMN-3EGEJ3-LKFE";
+		//TODO: Pick user address
+		string bodyJsonString = "name="+mosaic.id.name+"&address=TAUYBF-WNP3D2-6H3UEG-2ED6T6-DI6YMN-3EGEJ3-LKFE";
 		byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(bodyJsonString);
 		UnityWebRequest request = new UnityWebRequest(url, "POST");
 		request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
