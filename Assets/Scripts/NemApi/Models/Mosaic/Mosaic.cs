@@ -22,8 +22,8 @@ namespace NemApi.Models{
 			return null;
 		}
 
-		public string GetInitialSupply(){
-			return GetProperty ("initialSupply");
+		public int GetInitialSupply(){
+			return Int32.Parse(GetProperty ("initialSupply"));
 		}
 	}
 }

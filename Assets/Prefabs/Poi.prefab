@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 114746977652391280}
   - component: {fileID: 114050306640574768}
   m_Layer: 0
-  m_Name: RequestBtn
+  m_Name: PickButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Request
+  m_Text: Pick
 --- !u!114 &114027854621534006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -760,7 +760,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114214288280337040}
-        m_MethodName: OnRequestUnity
+        m_MethodName: OnPick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11339,7 +11339,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189848161521452}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}

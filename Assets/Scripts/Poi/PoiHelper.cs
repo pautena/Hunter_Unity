@@ -21,6 +21,8 @@ namespace Poi{
 		public Text description;
 		public Text unitiesText;
 
+		private Mosaic mosaic;
+
 		// Use this for initialization
 		void Start () {
 			poiCollider = GetComponent<Collider> ();		
@@ -32,13 +34,14 @@ namespace Poi{
 		}
 
 		public void Enable(Mosaic mosaic){
-			//TODO: Check if can enable with this mosaic;
-			SetEnabled(true);
-			SetupMosaic (mosaic);
+			if (mosaic.GetInitialSupply () > 0) {
+				SetEnabled (true);
+				SetMosaic (mosaic);
+			}
 		}
 
-		private void SetupMosaic(Mosaic mosaic){
-
+		private void SetMosaic(Mosaic mosaic){
+			this.mosaic = mosaic;
 			PoiDescription poiDescription = JsonUtility.FromJson<PoiDescription> (mosaic.description);
 			StartCoroutine (LoadImage (poiDescription.img_url));
 			title.text = poiDescription.name;
@@ -47,13 +50,15 @@ namespace Poi{
 		}
 
 		private void SetupUnities(Mosaic mosaic){
-			string unities = mosaic.GetInitialSupply();
+			int unities = mosaic.GetInitialSupply();
 			unitiesText.text = unities + " available";//TODO: Put this string as parameter
 		}
 
-		public void OnRequestUnity(){
-			Debug.Log ("OnRequestUnitiy");
-			//TODO: Request unity to api
+		public void OnPick(){
+			Debug.Log ("OnPick");
+			if (mosaic != null) {
+				StartCoroutine(GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ().pick (mosaic));
+			}
 		}
 
 		IEnumerator LoadImage(string url)
