@@ -17,7 +17,6 @@ namespace NemApi{
 
 		private string mosaicDefinitionPath = "account/mosaic/definition/page";
 		private string mosaicOwnerPath="account/mosaic/owned";
-		private string transactionPrepareAnnounce="transaction/prepare-announce";
 
 		// Use this for initialization
 		void Start () {

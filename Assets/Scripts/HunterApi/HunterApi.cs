@@ -18,11 +18,29 @@ public class HunterApi : MonoBehaviour {
 		baseUrl= host + ":" + port;
 	}
 
-	public IEnumerator pick(Mosaic mosaic){
+	public IEnumerator Pick(Mosaic mosaic){
 		string url = baseUrl + "/bounties/pick";
 
 		//TODO: Pick user address
 		string bodyJsonString = "name="+mosaic.id.name+"&address=TAUYBF-WNP3D2-6H3UEG-2ED6T6-DI6YMN-3EGEJ3-LKFE";
+		byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(bodyJsonString);
+		UnityWebRequest request = new UnityWebRequest(url, "POST");
+		request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
+		request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+		request.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+		yield return request.SendWebRequest();
+
+		Debug.Log("Response: " + request.downloadHandler.text);
+	}
+
+	public IEnumerator Exchange(Mosaic mosaic,string privateKey){
+		string url = baseUrl + "/bounties/exchange";
+
+		Debug.Log ("url: " + url);
+
+		//TODO: Pick user address
+		string bodyJsonString = "name="+mosaic.id.name+"&privateKey="+privateKey;
 		byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(bodyJsonString);
 		UnityWebRequest request = new UnityWebRequest(url, "POST");
 		request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);

@@ -57,7 +57,7 @@ namespace Poi{
 		public void OnPick(){
 			Debug.Log ("OnPick");
 			if (mosaic != null) {
-				StartCoroutine(GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ().pick (mosaic));
+				StartCoroutine(GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ().Pick (mosaic));
 			}
 		}
 

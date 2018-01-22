@@ -53,6 +53,9 @@ public class MosaicUIListItemView : MonoBehaviour {
 		Debug.Log ("RequestExchange");
 		string privateKey = "59e309f7db4cc17fcb1d0ddd85f331bf18be179cbb656eed8e2d69b98b5fb6ba";
 
+		HunterApi connectionApi = GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ();
+
+		StartCoroutine(connectionApi.Exchange(mosaic,privateKey));
 		//TODO: Call to new api
 	}
 }
