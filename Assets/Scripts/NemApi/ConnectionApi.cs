@@ -5,9 +5,10 @@ using UniRx;
 using Poi;
 using NemApi.Models;
 using System;
+using UnityEngine.Networking;
 
 namespace NemApi{
-	public class NemApi : MonoBehaviour {
+	public class ConnectionApi : MonoBehaviour {
 
 		public string baseUrl = "bigalice2.nem.ninja";
 		public int port = 7890;
@@ -16,6 +17,7 @@ namespace NemApi{
 
 		private string mosaicDefinitionPath = "account/mosaic/definition/page";
 		private string mosaicOwnerPath="account/mosaic/owned";
+		private string transactionPrepareAnnounce="transaction/prepare-announce";
 
 		// Use this for initialization
 		void Start () {

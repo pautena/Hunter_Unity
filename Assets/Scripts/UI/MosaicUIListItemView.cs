@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NemApi.Models;
 using UnityEngine.UI;
+using NemApi;
 
 public class MosaicUIListItemView : MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class MosaicUIListItemView : MonoBehaviour {
 	public Text name;
 	public Button exchangeBtn;
 	public float marginBottom=10f;
+
+	private Mosaic mosaic;
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +39,7 @@ public class MosaicUIListItemView : MonoBehaviour {
 	}
 
 	private void SetupMosaicInfo(Mosaic mosaic){
+		this.mosaic = mosaic;
 		MosaicJsonDescription description = mosaic.GetJsonDescription ();
 		name.text = description.name;
 		StartCoroutine(ImageUtils.LoadImage(description.img_url,icon));
@@ -47,5 +51,8 @@ public class MosaicUIListItemView : MonoBehaviour {
 
 	public void onRequestExchange(){
 		Debug.Log ("RequestExchange");
+		string privateKey = "59e309f7db4cc17fcb1d0ddd85f331bf18be179cbb656eed8e2d69b98b5fb6ba";
+
+		//TODO: Call to new api
 	}
 }

@@ -9,6 +9,7 @@ TagManager:
   - PanelPrize
   - MainUI
   - HunterApi
+  - NemApi
   layers:
   - Default
   - TransparentFX

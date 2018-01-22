@@ -7,7 +7,7 @@ using Poi;
 namespace NemApi{
 	public class LoadPois : MonoBehaviour {
 
-		public NemApi nemApi;
+		public ConnectionApi nemApi;
 
 		// Use this for initialization
 		void Start () {

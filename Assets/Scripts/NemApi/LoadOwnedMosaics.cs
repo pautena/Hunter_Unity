@@ -7,7 +7,7 @@ namespace NemApi{
 
 	public class LoadOwnedMosaics : MonoBehaviour {
 
-		public NemApi nemApi;
+		public ConnectionApi nemApi;
 		public MosaicUIListAdapter mosaicUIList;
 
 		private OwnedMosaic[] ownedMosaics;
