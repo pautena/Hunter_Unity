@@ -1,11 +1,16 @@
 fileFormatVersion: 2
 guid: f615f409cd75447c888255e5699714f6
-timeCreated: 1516646134
+timeCreated: 1516743598
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: UIpack_vector_0
-    21300002: UIpack_vector_1
+    21300000: rect button
+    21300002: input
+    21300004: circle button
+    21300006: small rect button
+    21300008: UIpack_vector_0
+    21300010: rect success
+    21300012: UIpack_vector_2
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -47,7 +52,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 1750, y: 1828, z: 3496, w: 1012}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -92,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UIpack_vector_0
+      name: rect button
       rect:
         serializedVersion: 2
-        x: 1753
-        y: 1832
-        width: 797
-        height: 191
+        x: 7240
+        y: 7575
+        width: 3318
+        height: 786
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -106,13 +111,69 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UIpack_vector_1
+      name: circle button
       rect:
         serializedVersion: 2
-        x: 3157
-        y: 36
-        width: 153
-        height: 150
+        x: 13061
+        y: 139
+        width: 613
+        height: 636
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: input
+      rect:
+        serializedVersion: 2
+        x: 21720
+        y: 6491
+        width: 3281
+        height: 848
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: small rect button
+      rect:
+        serializedVersion: 2
+        x: 7591
+        y: 0
+        width: 861
+        height: 787
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: UIpack_vector_0
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 253
+        width: 110
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: rect success
+      rect:
+        serializedVersion: 2
+        x: 7249
+        y: 9641
+        width: 3286
+        height: 793
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

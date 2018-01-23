@@ -231,7 +231,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 900}
+  m_SizeDelta: {x: -20, y: 850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267950946
 MonoBehaviour:
@@ -327,7 +327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000031671161}
+  m_AnchoredPosition: {x: 0, y: 0.00006904106}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &432871227
@@ -503,33 +503,6 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1039776705}
-    - target: {fileID: 114848191677459368, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartMainScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 114996592814086912, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300002, guid: f615f409cd75447c888255e5699714f6,
-        type: 3}
-    - target: {fileID: 114825053414432364, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 1190e1a3badae41bbbd6eab62053b762,
-        type: 3}
-    - target: {fileID: 224061987815403112, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 224061987815403112, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d04ace4ebaef4878b4ec5be6d069dc2, type: 2}
   m_IsPrefabParent: 0
