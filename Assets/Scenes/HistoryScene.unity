@@ -327,7 +327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00006904106}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &432871227
@@ -503,6 +503,27 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1039776705}
+    - target: {fileID: 114996592814086912, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 98ff123fe280e44ce8eca2c31e05d481,
+        type: 3}
+    - target: {fileID: 114996592814086912, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.37254903
+      objectReference: {fileID: 0}
+    - target: {fileID: 114996592814086912, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.41133702
+      objectReference: {fileID: 0}
+    - target: {fileID: 114996592814086912, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.4509804
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d04ace4ebaef4878b4ec5be6d069dc2, type: 2}
   m_IsPrefabParent: 0
@@ -511,6 +532,25 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224485127005249048, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
     type: 2}
   m_PrefabInternal: {fileID: 459914117}
+--- !u!1 &459914119 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1272176599360646, guid: 4d04ace4ebaef4878b4ec5be6d069dc2,
+    type: 2}
+  m_PrefabInternal: {fileID: 459914117}
+--- !u!114 &459914120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 459914119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &603129964
 GameObject:
   m_ObjectHideFlags: 0

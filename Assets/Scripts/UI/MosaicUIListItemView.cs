@@ -34,7 +34,8 @@ public class MosaicUIListItemView : MonoBehaviour {
 
 	private void SetupHeight(int index){
 		float height = rect.rect.height;
-		float posY = -((height * index) + marginBottom);
+		float posY = -((height+marginBottom) *index);
+		Debug.Log ("posY: " + posY);
 		transform.localPosition = new Vector3 (transform.localPosition.x, posY, transform.localPosition.z);
 	}
 
