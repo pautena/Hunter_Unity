@@ -6,13 +6,19 @@ using NemApi.Utils;
 using System.Security;
 using NemApi.Models;
 using NemApi.CryptoFunctions;
+using Chaos.NaCl;
+using System;
+
+
 
 namespace NemApi{
 	public class TestEncription : MonoBehaviour {
 
-		public string initialPrivateKey="59e309f7db4cc17fcb1d0ddd85f331bf18be179cbb656eed8e2d69b98b5fb6ba";
-		public string expectedPublicKey="40d8ed4aa306c94b6ec6c7036a7b5dca2d1b7fa5cfeec222dd0dac44ccbabfcf";
-		public string expectedAddress="TBWHKDPRWQYD5JFVATPOOBJZQDFXZ3LDHYYBJHF3";
+		private string initialPrivateKey="0bb0672d0c9cf25ee0569ba300261fd48d1c0c84b54f7c7b52c3b05c951c9227";
+		private string expectedPublicKey="e79acab4b4155fdcbe7d05f09ae9200458f4558cb3fc34b368cffd3dbf0d8ed3";
+
+		private string initialPublicKey = "e79acab4b4155fdcbe7d05f09ae9200458f4558cb3fc34b368cffd3dbf0d8ed3";
+		private string expectedAddress="TAUYBFWNP3D26H3UEG2ED6T6DI6YMN3EGEJ3LKFE";
 
 		// Use this for initialization
 		void Start () {
@@ -20,14 +26,37 @@ namespace NemApi{
 
 			Debug.Log ("initialPrivateKey: " + initialPrivateKey);
 			PrivateKey privateKey = new PrivateKey (initialPrivateKey);
-			PublicKey publicKey = CalculatePublicKey (privateKey);
-			string address = CalculateAddress (publicKey);
+			TestSign ();
+			CalculatePublicKey (privateKey);
+
+			PublicKey publicKey = new PublicKey (initialPublicKey);
+			CalculateAddress (publicKey);
+
 
 		}
 
 		// Update is called once per frame
 		void Update () {
 
+		}
+
+		private void TestSign(){
+			byte[] privateKeySeedArray = CryptoBytes.FromHexString(initialPublicKey);
+			Array.Reverse(privateKeySeedArray);
+
+			byte[] message = CryptoBytes.FromHexString("02534234");
+			byte[] expandedPrivateKey;
+			byte[] publicKey;
+
+			Ed25519.KeyPairFromSeed (out publicKey, out expandedPrivateKey, privateKeySeedArray);
+			byte[] signature = Ed25519.Sign (message, expandedPrivateKey);
+
+
+			publicKey = Ed25519.PublicKeyFromSeed (privateKeySeedArray);
+			bool verified = Ed25519.Verify (signature, message, publicKey);
+			Debug.Log ("verified: " + verified);
+			PublicKeyConversion.PrintByteArray (publicKey);
+			Debug.Log("public key TestSign: "+CryptoBytes.ToHexStringLower(publicKey));
 		}
 
 
@@ -40,6 +69,7 @@ namespace NemApi{
 			} else {
 				Debug.LogError ("error generating public key. generatedPublicKey: "+publicKey.Raw);
 			}
+
 
 			return publicKey;
 

@@ -30,7 +30,7 @@ namespace NemApi.CryptoFunctions{
 			return CryptoBytes.ToHexStringLower(publicKeyArray);
 		}
 
-		private static void PrintByteArray(byte[] bytes)
+		public static void PrintByteArray(byte[] bytes)
 		{
 			var sb = new StringBuilder("new byte[] { ");
 			foreach (var b in bytes)

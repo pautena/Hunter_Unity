@@ -3,10 +3,12 @@
 namespace Models
 {
 	public class User{
-		public string secretToken;
+		public string secretKey;
+		public string publicKey;
 
-		public User (string secretToken){
-			this.secretToken = secretToken;
+		public User (string secretKey,string publicKey){
+			this.secretKey = secretKey;
+			this.publicKey = publicKey;
 		}
 	}
 }

@@ -10,6 +10,7 @@ TagManager:
   - MainUI
   - HunterApi
   - NemApi
+  - NotificationManager
   layers:
   - Default
   - TransparentFX

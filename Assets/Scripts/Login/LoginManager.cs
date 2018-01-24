@@ -10,7 +10,8 @@ public class LoginManager : MonoBehaviour {
 	public Canvas loginInputCanvas;
 	public Button logoutButton;
 
-	public InputField secretTokenInputField;
+	public InputField secretKeyInputField;
+	public InputField publicKeyInputField;
 
 	public float progressVelocity=6f;
 
@@ -55,17 +56,27 @@ public class LoginManager : MonoBehaviour {
 
 	public void Login(){
 		Debug.Log ("Login");
-		string secretToken = secretTokenInputField.text;
+		string privateKey = secretKeyInputField.text;
+		string publicKey = secretKeyInputField.text;
 
-		if (secretToken == "") {
-			Debug.LogError ("secretToken is empty");
+		NotificationManager notificationManager = GameObject.FindGameObjectWithTag ("NotificationManager").GetComponent<NotificationManager> ();
+		if (privateKey == "") {
+			//TODO: Show notification message
+			notificationManager.ShowMessage("Private key is empty",false);
+			return;
+		}
+
+		if (publicKey == "") {
+			//TODO: Show notification message
+			notificationManager.ShowMessage("Public key is empty",false);
 			return;
 		}
 
 
 
-		userManager.Login (secretToken);
+		userManager.Login (privateKey,publicKey);
 		SetupVisibleUI ();
+		notificationManager.ShowMessage("Login success",true);
 	}
 
 	public void Logout(){

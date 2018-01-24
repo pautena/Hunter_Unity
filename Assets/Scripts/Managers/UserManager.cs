@@ -37,10 +37,9 @@ namespace Models.Managers{
 		}
 
 
-		public void Login(string secretToken){
+		public void Login(string secretKey,string publicKey){
 			Debug.Log ("start Login");
-			//TODO: Login into nem	
-			user = new User(secretToken);
+			user = new User(secretKey,publicKey);
 			Save ();
 		}
 
