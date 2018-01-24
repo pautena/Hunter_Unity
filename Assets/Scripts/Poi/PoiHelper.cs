@@ -15,11 +15,11 @@ namespace Poi{
 
 		private Collider poiCollider;
 		public string id = "-1";
-		public Canvas poiUI;
 		public Image poiImage;
 		public Text title;
 		public Text description;
 		public Text unitiesText;
+		public Animator animator;
 
 		private Mosaic mosaic;
 
@@ -107,12 +107,12 @@ namespace Poi{
 
 		public void ShowPoiUI(){
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<MainUIManager> ().Hide ();
-			poiUI.enabled = true;
+			animator.SetTrigger ("Show");
 		}
 
 		public void HidePoiUI(){
-			poiUI.enabled = false;
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<MainUIManager> ().Show ();
+			animator.SetTrigger ("Hide");
 		}
 
 		private bool PlayerInsideCollider(){
