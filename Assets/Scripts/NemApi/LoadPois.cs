@@ -9,19 +9,17 @@ namespace NemApi{
 
 		public ConnectionApi nemApi;
 
+		public float delayStartRequest = 2f;
+		public float repeatRequestTime = 15f;
+
 		// Use this for initialization
 		void Start () {
-			Invoke ("RequestPois", 2);
-
-		}
-
-		// Update is called once per frame
-		void Update () {
-
+			Invoke ("RequestPois", delayStartRequest);
 		}
 
 		private void RequestPois(){
 			nemApi.GetMosaicDefinition (this.OnGetMosaicDefinition);
+			Invoke ("RequestPois", repeatRequestTime);
 		}
 
 		public void OnGetMosaicDefinition(MosaicGroup mosaicGroup){

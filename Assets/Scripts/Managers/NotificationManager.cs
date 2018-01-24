@@ -29,6 +29,5 @@ public class NotificationManager : MonoBehaviour {
 
 	public void HideMessage(){
 		animator.SetTrigger ("Hide");
-		messageText.text = "";
 	}
 }

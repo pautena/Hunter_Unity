@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224077351416559524}
   - component: {fileID: 222265327029542964}
   - component: {fileID: 114479681475399202}
+  - component: {fileID: 114758347364760416}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -152,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageText: {fileID: 114745439519429054}
-  successColor: {r: 0.18088229, g: 0.9044118, b: 0, a: 0}
-  errorColor: {r: 0.97794116, g: 0, b: 0, a: 0}
+  successColor: {r: 0.18088229, g: 0.9044118, b: 0, a: 1}
+  errorColor: {r: 0.97794116, g: 0, b: 0, a: 1}
   panelBackground: {fileID: 114479681475399202}
   showDuration: 2
   animator: {fileID: 95988114327937284}
@@ -190,6 +191,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
+--- !u!114 &114758347364760416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350787775159630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114775484064366560
 MonoBehaviour:
   m_ObjectHideFlags: 1
