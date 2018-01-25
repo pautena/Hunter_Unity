@@ -9,6 +9,14 @@ namespace NemApi.Models{
 		override public string ToString(){
 			return "namespaceId: " + namespaceId + ", name: " + name;
 		}
+
+		public override bool Equals (object obj){
+			try{
+				return namespaceId == ((MosaicId)obj).namespaceId && name == ((MosaicId)obj).name;
+			}catch(Exception){
+				return false;
+			}
+		}
 		
 	}
 }

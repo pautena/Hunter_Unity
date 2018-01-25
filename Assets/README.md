@@ -13,3 +13,13 @@ Bad resolution on POI texts -> Text mesh pro
 
 #Credits
 https://www.youtube.com/watch?v=mBLn7Cp9nsM&feature=youtu.be
+
+
+#Description structure
+
+{
+	"poi_id":"3",
+	"name":"Samsung Galaxy S8",
+	"description":"Consigue el último telefono",
+	"img_url":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5770/5770900cv20d.jpg"
+}

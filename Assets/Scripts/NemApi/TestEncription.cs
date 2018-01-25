@@ -41,22 +41,31 @@ namespace NemApi{
 		}
 
 		private void TestSign(){
-			byte[] privateKeySeedArray = CryptoBytes.FromHexString(initialPublicKey);
+
+			string myPrivateKey = "593ed16a4c58152d6f2989dfc3acc98460bc1ae16d031153bb994a47bd47c3a4";
+			string myPublicKey = "8b242d83b05e64ed6fa367141c0dd30b0c9a49cca486bdb8528270f5096b7d08";
+			byte[] privateKeySeedArray = CryptoBytes.FromHexString(initialPrivateKey);
 			Array.Reverse(privateKeySeedArray);
 
-			byte[] message = CryptoBytes.FromHexString("02534234");
-			byte[] expandedPrivateKey;
-			byte[] publicKey;
+			byte[] publicKey = Ed25519.PublicKeyFromSeed (privateKeySeedArray);
+			Array.Reverse(publicKey);
 
-			Ed25519.KeyPairFromSeed (out publicKey, out expandedPrivateKey, privateKeySeedArray);
-			byte[] signature = Ed25519.Sign (message, expandedPrivateKey);
+			string hexPublicKey = CryptoBytes.ToHexStringLower (publicKey);
+			Debug.Log("hexPublicKey " + hexPublicKey);
+			Debug.Log ("assertTrueEqual " + myPublicKey == hexPublicKey);
+
+			//byte[] message = CryptoBytes.FromHexString("02534234");
+			//byte[] expandedPrivateKey;
+			//byte[] publicKey;
+
+			//Ed25519.KeyPairFromSeed (out publicKey, out expandedPrivateKey, privateKeySeedArray);
+			//byte[] signature = Ed25519.Sign (message, expandedPrivateKey);
 
 
-			publicKey = Ed25519.PublicKeyFromSeed (privateKeySeedArray);
-			bool verified = Ed25519.Verify (signature, message, publicKey);
-			Debug.Log ("verified: " + verified);
-			PublicKeyConversion.PrintByteArray (publicKey);
-			Debug.Log("public key TestSign: "+CryptoBytes.ToHexStringLower(publicKey));
+			//bool verified = Ed25519.Verify (signature, message, publicKey);
+			//Debug.Log ("verified: " + verified);
+			//PublicKeyConversion.PrintByteArray (publicKey);
+			//Debug.Log("public key TestSign: "+CryptoBytes.ToHexStringLower(publicKey));
 		}
 
 

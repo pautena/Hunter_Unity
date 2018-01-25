@@ -32,7 +32,7 @@ public class MosaicUIListItemView : MonoBehaviour {
 		SetupExchange (ownedMosaic);
 	}
 
-	private void SetupHeight(int index){
+	public void SetupHeight(int index){
 		float height = rect.rect.height;
 		float posY = -((height+marginBottom) *index);
 		Debug.Log ("posY: " + posY);
@@ -51,12 +51,10 @@ public class MosaicUIListItemView : MonoBehaviour {
 	}
 
 	public void onRequestExchange(){
-		Debug.Log ("RequestExchange");
-		string privateKey = "59e309f7db4cc17fcb1d0ddd85f331bf18be179cbb656eed8e2d69b98b5fb6ba";
+		GameObject.FindGameObjectWithTag ("UIExchange").GetComponent<UIExchangeManager> ().ShowExchangeDialog (mosaic);
+	}
 
-		HunterApi connectionApi = GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ();
-
-		StartCoroutine(connectionApi.Exchange(mosaic,privateKey));
-		//TODO: Call to new api
+	public Mosaic GetMosaic(){
+		return mosaic;
 	}
 }

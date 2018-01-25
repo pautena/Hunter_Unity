@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NemApi.Models;
+using Models;
+using Models.Managers;
 
 namespace NemApi{
 
@@ -12,10 +14,13 @@ namespace NemApi{
 
 		private OwnedMosaic[] ownedMosaics;
 		private MosaicGroup mosaicGroup;
+		private User user;
 
 		// Use this for initialization
 		void Start () {
-			nemApi.LoadOwnedMosaics (this.OnLoadOwnedMosaicsSuccess);
+			user = UserManager.GetInstance().GetUser();
+			string address = user.GetAddress (nemApi.network);
+			nemApi.LoadOwnedMosaics (address,this.OnLoadOwnedMosaicsSuccess);
 			nemApi.GetMosaicDefinition (this.OnGetMosacDefinitionSuccess);
 		}
 

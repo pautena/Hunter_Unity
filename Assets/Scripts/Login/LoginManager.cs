@@ -57,7 +57,7 @@ public class LoginManager : MonoBehaviour {
 	public void Login(){
 		Debug.Log ("Login");
 		string privateKey = secretKeyInputField.text;
-		string publicKey = secretKeyInputField.text;
+		string publicKey = publicKeyInputField.text;
 
 		NotificationManager notificationManager = GameObject.FindGameObjectWithTag ("NotificationManager").GetComponent<NotificationManager> ();
 		if (privateKey == "") {

@@ -5,12 +5,13 @@ using UnityEngine.Events;
 using Mapbox.Unity.MeshGeneration.Interfaces;
 using NemApi.Models;
 using UnityEngine.UI;
+using Models;
+using Models.Managers;
 
 
 namespace Poi{
 	public class PoiHelper : MonoBehaviour,IFeaturePropertySettable {
 
-		public bool poiEnabled=true;
 		public ParticleSystem embersParticleSystem;
 
 		private Collider poiCollider;
@@ -18,57 +19,58 @@ namespace Poi{
 		public Image poiImage;
 		public Text title;
 		public Text description;
-		public Text unitiesText;
 		public Animator animator;
+		public Button pickButton;
+		public Animator accomplishedAnimator;
 
 		private Mosaic mosaic;
+		private int quantity;
+		private User user;
 
 		// Use this for initialization
 		void Start () {
-			poiCollider = GetComponent<Collider> ();		
+			poiCollider = GetComponent<Collider> ();
+			quantity = 0;
+			user = UserManager.GetInstance ().GetUser ();
 		}
 
-		// Update is called once per frame
-		void Update () {
-			SetupEnabled ();
-		}
-
-		public void Enable(Mosaic mosaic){
-			if (mosaic.GetInitialSupply () > 0) {
-				SetEnabled (true);
-				SetMosaic (mosaic);
-			}
-		}
-
-		private void SetMosaic(Mosaic mosaic){
-			this.mosaic = mosaic;
-			MosaicJsonDescription poiDescription = mosaic.GetJsonDescription ();
-			StartCoroutine (ImageUtils.LoadImage (poiDescription.img_url,poiImage));
-			title.text = poiDescription.name;
-			description.text = poiDescription.description;
-			SetupUnities (mosaic);
-		}
-
-		private void SetupUnities(Mosaic mosaic){
-			int unities = mosaic.GetInitialSupply();
-			unitiesText.text = unities + " available";//TODO: Put this string as parameter
-		}
-
-		public void OnPick(){
-			Debug.Log ("OnPick");
-			if (mosaic != null) {
-				StartCoroutine(GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ().Pick (mosaic));
-			}
-		}
-
-		private void SetupEnabled(){
-			if (poiEnabled) {
+		private void SetupEnable(){
+			Debug.Log ("IsEnabled: " + IsEnabled());
+			if (IsEnabled ()) {
 				Enable ();
 			} else {
 				Disable ();
 			}
 		}
 
+		public void SetMosaic(Mosaic mosaic,byte network){
+			this.mosaic = mosaic;
+			MosaicJsonDescription poiDescription = mosaic.GetJsonDescription ();
+			StartCoroutine (ImageUtils.LoadImage (poiDescription.img_url,poiImage));
+			title.text = poiDescription.name;
+			description.text = poiDescription.description;
+			SetupEnable ();
+			CheckHasMosaic (mosaic, network);
+		}
+
+		private void CheckHasMosaic(Mosaic mosaic,byte network){
+			string address = user.GetAddress (network);
+			Debug.Log ("address:" + address);
+		}
+
+		public void SetQuantity(int quantity){
+			this.quantity = quantity;
+			SetupEnable ();
+		}
+
+		public void OnPick(){
+			Debug.Log ("OnPick");
+			if (IsEnabled()) {
+				StartCoroutine(GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ().Pick (mosaic));
+				accomplishedAnimator.SetTrigger ("Show");
+				pickButton.gameObject.SetActive (false);
+			}
+		}
 
 		public void Enable(){
 			if (!embersParticleSystem.isPlaying) {
@@ -82,13 +84,12 @@ namespace Poi{
 			}
 		}
 
-		private void SetEnabled(bool poiEnabled){
-			this.poiEnabled = poiEnabled;
-			SetupEnabled ();
+		public bool IsEnabled(){
+			return mosaic != null && quantity > 0;
 		}
 
 		public void OnClick(){
-			if (/*PlayerInsideCollider () &&*/ poiEnabled) {
+			if (/*PlayerInsideCollider () &&*/ IsEnabled()) {
 				ShowPrize ();
 			}
 		}
@@ -130,6 +131,10 @@ namespace Poi{
 		private void SetId(string id){
 			this.id = id;
 			new PoiManager ().SetPoiName (gameObject,id);
+		}
+
+		public Mosaic GetMosaic(){
+			return mosaic;
 		}
 
 	}

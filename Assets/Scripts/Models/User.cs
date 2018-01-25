@@ -1,4 +1,6 @@
 ﻿using System;
+using NemApi.Models;
+using NemApi.CryptoFunctions;
 
 namespace Models
 {
@@ -9,6 +11,12 @@ namespace Models
 		public User (string secretKey,string publicKey){
 			this.secretKey = secretKey;
 			this.publicKey = publicKey;
+		}
+
+		public string GetAddress(byte network){
+			PublicKey nemPublicKey = new PublicKey (this.publicKey);
+			return AddressEncoding.ToAddress(network,nemPublicKey);
+
 		}
 	}
 }

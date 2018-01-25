@@ -18,18 +18,39 @@ namespace Poi{
 			return GameObject.Find (name);
 		}
 
+		public GameObject FindPoiByMosaicId(MosaicId mosaicId){
+
+			GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("Poi");
+
+			foreach (GameObject gameObject in gameObjects) {
+				try{
+					PoiHelper poiHelper = gameObject.GetComponent<PoiHelper> ();
+					Mosaic mosaic = poiHelper.GetMosaic();
+
+					if (mosaic.id.Equals(mosaicId)){
+						return gameObject;
+					}
+				}catch(NullReferenceException){
+				}
+			}
+			return null;
+		}
+
 		public void SetPoiName(GameObject gameOjbect,string id){
 			gameOjbect.name = GetPoiName(id);
 		}
 
-		public void UpdatePois(MosaicGroup mosaicGroup){
+		public void UpdatePois(MosaicGroup mosaicGroup,MosaicAmountGroup mosaicAmountGroup,byte network){
 
 			foreach (Mosaic mosaic in mosaicGroup.data) {
-				UpdatePoi (mosaic);
+				MosaicAmount mosaicAmount = mosaicAmountGroup.FindById (mosaic.id);
+				if (mosaicAmount != null) {
+					UpdatePoi (mosaic, mosaicAmount, network);
+				}
 			}
 		}
 
-		public void UpdatePoi(Mosaic mosaic){
+		public void UpdatePoi(Mosaic mosaic,MosaicAmount mosaicAmount,byte network){
 			try{
 				MosaicJsonDescription description = mosaic.GetJsonDescription();
 
@@ -38,15 +59,18 @@ namespace Poi{
 				if(poiGameObject!=null){
 					PoiHelper poiHelper =poiGameObject.GetComponent<PoiHelper>();
 
-					poiHelper.Enable(mosaic);
+					if (mosaicAmount.quantity > 0){
+						poiHelper.SetMosaic(mosaic,network);
+						poiHelper.SetQuantity(mosaicAmount.quantity);
+					}else{
+						poiHelper.Disable();
+					}
+
 				}else{
 					Debug.LogError("poi "+description.poi_id+" not found");
 				}
 
-			}catch(ArgumentException e){
-				Debug.LogError (e.Message+", description: "+mosaic.description);
-			}
+			}catch(ArgumentException){}
 		}
-
 	}
 }

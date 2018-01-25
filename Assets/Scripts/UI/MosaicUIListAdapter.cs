@@ -44,5 +44,18 @@ public class MosaicUIListAdapter : MonoBehaviour {
 			views.Add (itemView);
 			index++;
 		}
-	}		
+	}
+
+	public void DeleteMosaic(Mosaic mosaic){
+		int index = 0;
+		foreach (MosaicUIListItemView item in views) {
+			if (item.GetMosaic ().id.Equals (mosaic.id)) {
+				Destroy (item.gameObject);
+			} else {
+				item.SetupHeight (index);
+				index++;
+			}
+
+		}
+	}
 }

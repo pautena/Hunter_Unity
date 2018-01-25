@@ -14,8 +14,10 @@ namespace NemApi{
 		public int port = 7890;
 		public string nemNamespace = "hunter";
 		public string address ="TBWHKDPRWQYD5JFVATPOOBJZQDFXZ3LDHYYBJHF3";
+		public byte network = NetworkVersion.TEST_NET;
 
 		private string mosaicDefinitionPath = "account/mosaic/definition/page";
+		private string mosaicAmountPath = "account/mosaic/owned";
 		private string mosaicOwnerPath="account/mosaic/owned";
 
 		// Use this for initialization
@@ -37,10 +39,9 @@ namespace NemApi{
 				.Subscribe(
 					x => this.OnLoadMosaicsSuccess(x,callback), // onSuccess
 					ex => Debug.LogException(ex)); // onError
-
-
-
 		}
+
+
 
 		public void OnLoadMosaicsSuccess(string response,Action<MosaicGroup> callback){
 			MosaicGroup mosaicGroup = JsonUtility.FromJson<MosaicGroup> (response);
@@ -48,14 +49,34 @@ namespace NemApi{
 
 		}
 
+		public void GetMosaicsAmount(Action<MosaicAmountGroup> callback){
+			GetMosaicsAmount (address, callback);
+		}
+
+		public void GetMosaicsAmount(string address,Action<MosaicAmountGroup> callback){
+			string url = "http://" + baseUrl + ":" + port + "/" + mosaicAmountPath + "?address=" + address;
+
+			ObservableWWW.Get(url)
+				.Subscribe(
+					x => this.OnGetMosaicsAmountSuccess(x,callback), // onSuccess
+					ex => Debug.LogException(ex)); // onError
+		}
+
+		public void OnGetMosaicsAmountSuccess(string response,Action<MosaicAmountGroup> callback){
+			MosaicAmountGroup mosaicGroup = JsonUtility.FromJson<MosaicAmountGroup> (response);
+			callback.Invoke (mosaicGroup);
+
+		}
+
 		public void LoadOwnedMosaics(Action<OwnedMosaic[]> callback){
-			string address = "TAUYBFWNP3D26H3UEG2ED6T6DI6YMN3EGEJ3LKFE";//TODO: Remove and pick from user info
+			LoadOwnedMosaics (address, callback);
+		}
+			
+
+		public void LoadOwnedMosaics(string mosaicAddress,Action<OwnedMosaic[]> callback){
+			Debug.Log ("mosaicAddress: " + mosaicAddress);
 			string url = "http://" + baseUrl + ":" + port + "/" + mosaicOwnerPath
-			             + "?address=" + address;
-
-
-			Debug.Log ("LoadOwnedMosaics. url: "+url);
-
+				+ "?address=" + mosaicAddress;
 			ObservableWWW.Get(url)
 				.Subscribe(
 					x => this.OnLoadOwnerMosaicsSuccess(x,callback), // onSuccess

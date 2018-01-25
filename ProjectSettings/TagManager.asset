@@ -11,6 +11,7 @@ TagManager:
   - HunterApi
   - NemApi
   - NotificationManager
+  - UIExchange
   layers:
   - Default
   - TransparentFX
