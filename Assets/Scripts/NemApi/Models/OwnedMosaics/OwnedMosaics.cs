@@ -28,6 +28,26 @@ namespace NemApi.Models{
 			}
 			return ownedMosaics.ToArray ();
 		}
+
+		public void FilterMosaicsByNamespace(string nemNamespace){
+			List<OwnedMosaic> filteredMosaics = new List<OwnedMosaic> ();
+
+			foreach(OwnedMosaic ownedMosaic in data){
+				if (ownedMosaic.mosaicId.namespaceId == nemNamespace) {
+					filteredMosaics.Add (ownedMosaic);
+				}
+			}
+			data = filteredMosaics.ToArray ();
+		}
+
+		public OwnedMosaic FindMosaicById(MosaicId mosaicId){
+			foreach(OwnedMosaic ownedMosaic in data){
+				if (ownedMosaic.mosaicId.Equals(mosaicId)) {
+					return ownedMosaic;
+				}
+			}
+			return null;
+		}
 	}
 }
 

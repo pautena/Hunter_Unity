@@ -12,7 +12,7 @@ namespace NemApi{
 		public ConnectionApi nemApi;
 		public MosaicUIListAdapter mosaicUIList;
 
-		private OwnedMosaic[] ownedMosaics;
+		private OwnedMosaics ownedMosaics;
 		private MosaicGroup mosaicGroup;
 		private User user;
 
@@ -29,7 +29,7 @@ namespace NemApi{
 
 		}
 
-		private void OnLoadOwnedMosaicsSuccess(OwnedMosaic[] ownedMosaics){
+		private void OnLoadOwnedMosaicsSuccess(OwnedMosaics ownedMosaics){
 			this.ownedMosaics = ownedMosaics;
 			SendMosaics ();
 			
@@ -42,7 +42,7 @@ namespace NemApi{
 
 		private void SendMosaics(){
 			if (ownedMosaics != null && mosaicGroup != null) {
-				mosaicUIList.SetItems (ownedMosaics,mosaicGroup);
+				mosaicUIList.SetItems (ownedMosaics.data,mosaicGroup);
 			}
 		}
 	}

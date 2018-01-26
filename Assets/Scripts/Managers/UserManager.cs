@@ -38,7 +38,6 @@ namespace Models.Managers{
 
 
 		public void Login(string secretKey,string publicKey){
-			Debug.Log ("start Login");
 			user = new User(secretKey,publicKey);
 			Save ();
 		}
@@ -59,7 +58,6 @@ namespace Models.Managers{
 			if (File.Exists (userFilePath)) {
 				string json = File.ReadAllText (userFilePath);
 				bool haveUser = (json!=null && json.Length > 0);
-				Debug.Log ("load user("+haveUser+") -> json: " + json);
 				if (haveUser) {
 					user = JsonUtility.FromJson<User> (json);
 				}

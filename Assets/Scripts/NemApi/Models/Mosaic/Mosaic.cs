@@ -10,7 +10,7 @@ namespace NemApi.Models{
 		public MosaicId id;
 		public MosaicProperty[] properties;
 
-		public string ToString(){
+		override public string ToString(){
 			return "{creator:"+creator+", description: "+description+"}";
 		}
 

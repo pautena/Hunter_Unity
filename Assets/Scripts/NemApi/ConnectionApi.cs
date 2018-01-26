@@ -68,13 +68,12 @@ namespace NemApi{
 
 		}
 
-		public void LoadOwnedMosaics(Action<OwnedMosaic[]> callback){
+		public void LoadOwnedMosaics(Action<OwnedMosaics> callback){
 			LoadOwnedMosaics (address, callback);
 		}
 			
 
-		public void LoadOwnedMosaics(string mosaicAddress,Action<OwnedMosaic[]> callback){
-			Debug.Log ("mosaicAddress: " + mosaicAddress);
+		public void LoadOwnedMosaics(string mosaicAddress,Action<OwnedMosaics> callback){
 			string url = "http://" + baseUrl + ":" + port + "/" + mosaicOwnerPath
 				+ "?address=" + mosaicAddress;
 			ObservableWWW.Get(url)
@@ -83,10 +82,9 @@ namespace NemApi{
 					ex => Debug.LogException(ex)); // onError
 		}
 
-		public void OnLoadOwnerMosaicsSuccess(string response,Action<OwnedMosaic[]> callback){
-			Debug.Log ("response: " + response);
-			OwnedMosaics responseOwnedMosaics = JsonUtility.FromJson<OwnedMosaics> (response);
-			OwnedMosaic[] ownedMosaics = responseOwnedMosaics.FindMosaicsByNamespace (nemNamespace);
+		public void OnLoadOwnerMosaicsSuccess(string response,Action<OwnedMosaics> callback){
+			OwnedMosaics ownedMosaics = JsonUtility.FromJson<OwnedMosaics> (response);
+			ownedMosaics.FilterMosaicsByNamespace (nemNamespace);
 			callback.Invoke (ownedMosaics);
 		}
 	}

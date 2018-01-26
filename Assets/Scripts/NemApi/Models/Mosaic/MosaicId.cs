@@ -7,7 +7,7 @@ namespace NemApi.Models{
 		public string name;
 
 		override public string ToString(){
-			return "namespaceId: " + namespaceId + ", name: " + name;
+			return namespaceId + ":" + name;
 		}
 
 		public override bool Equals (object obj){

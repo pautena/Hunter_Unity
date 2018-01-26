@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using NemApi.Models;
 using Poi;
+using Models;
+using Models.Managers;
 
 namespace NemApi{
 	public class LoadPois : MonoBehaviour {
@@ -14,10 +16,13 @@ namespace NemApi{
 
 		private MosaicGroup mosaicGroup;
 		private MosaicAmountGroup mosaicAmountGroup;
+		private OwnedMosaics ownedMosaics;
+		private User user;
 
 		// Use this for initialization
 		void Start () {
 			Invoke ("RequestPois", delayStartRequest);
+			user = UserManager.GetInstance().GetUser();
 		}
 
 		private void RequestPois(){
@@ -32,7 +37,14 @@ namespace NemApi{
 
 		public void OnGetMosaicsAmountSuccess(MosaicAmountGroup mosaicAmountGroup){
 			this.mosaicAmountGroup = mosaicAmountGroup;
-			new PoiManager ().UpdatePois (mosaicGroup,mosaicAmountGroup,nemApi.network);
+			string address = user.GetAddress (nemApi.network);
+			nemApi.LoadOwnedMosaics (address, this.OnLoadOwnedMosaicsSuccess);
+		}
+
+		private void OnLoadOwnedMosaicsSuccess(OwnedMosaics ownedMosaics){
+			this.ownedMosaics = ownedMosaics;
+			new PoiManager ().UpdatePois (mosaicGroup,mosaicAmountGroup,this.ownedMosaics,nemApi.network);
+
 		}
 	}
 }

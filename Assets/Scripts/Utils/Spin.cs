@@ -7,8 +7,9 @@ public class Spin : MonoBehaviour
 	public Vector3 direction = Vector3.left;
 
 
-	void Update ()
+	void FixedUpdate ()
 	{
-		transform.Rotate(direction, speed * Time.deltaTime);
+		//transform.RotateAround(direction, speed * Time.deltaTime);
+		transform.RotateAround(transform.position, direction, Time.deltaTime * speed);
 	}
 }

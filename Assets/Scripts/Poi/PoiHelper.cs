@@ -22,21 +22,25 @@ namespace Poi{
 		public Animator animator;
 		public Button pickButton;
 		public Animator accomplishedAnimator;
+		public Animator ownedAnimator;
 
 		private Mosaic mosaic;
 		private int quantity;
 		private User user;
+		private bool owned;
 
 		// Use this for initialization
 		void Start () {
 			poiCollider = GetComponent<Collider> ();
 			quantity = 0;
+			owned = false;
 			user = UserManager.GetInstance ().GetUser ();
 		}
 
 		private void SetupEnable(){
-			Debug.Log ("IsEnabled: " + IsEnabled());
-			if (IsEnabled ()) {
+			if (IsOwned ()) {
+				Owned ();
+			}else if (IsEnabled ()) {
 				Enable ();
 			} else {
 				Disable ();
@@ -55,7 +59,6 @@ namespace Poi{
 
 		private void CheckHasMosaic(Mosaic mosaic,byte network){
 			string address = user.GetAddress (network);
-			Debug.Log ("address:" + address);
 		}
 
 		public void SetQuantity(int quantity){
@@ -63,33 +66,52 @@ namespace Poi{
 			SetupEnable ();
 		}
 
+		public void SetOwned(bool owned){
+			this.owned = owned;
+			SetupEnable ();
+		}
+
 		public void OnPick(){
-			Debug.Log ("OnPick");
-			if (IsEnabled()) {
+			if (IsEnabled() && !IsOwned()) {
 				StartCoroutine(GameObject.FindGameObjectWithTag ("HunterApi").GetComponent<HunterApi> ().Pick (mosaic));
 				accomplishedAnimator.SetTrigger ("Show");
 				pickButton.gameObject.SetActive (false);
+				owned = true;
+				SetupEnable ();
 			}
+		}
+
+		public void Owned(){
+			if (embersParticleSystem.isPlaying) {
+				embersParticleSystem.Stop ();
+			}
+			ownedAnimator.SetTrigger ("Show");
 		}
 
 		public void Enable(){
 			if (!embersParticleSystem.isPlaying) {
 				embersParticleSystem.Play ();
 			}
+			ownedAnimator.SetTrigger ("Hide");
 		}
 
 		public void Disable(){
 			if (embersParticleSystem.isPlaying) {
 				embersParticleSystem.Stop ();
 			}
+			ownedAnimator.SetTrigger ("Hide");
 		}
 
 		public bool IsEnabled(){
 			return mosaic != null && quantity > 0;
 		}
 
+		public bool IsOwned(){
+			return owned;
+		}
+
 		public void OnClick(){
-			if (/*PlayerInsideCollider () &&*/ IsEnabled()) {
+			if (mosaic!=null) {
 				ShowPrize ();
 			}
 		}
@@ -109,6 +131,20 @@ namespace Poi{
 		public void ShowPoiUI(){
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<MainUIManager> ().Hide ();
 			animator.SetTrigger ("Show");
+			EnablePickButton ();
+		}
+
+		private void EnablePickButton(){
+			pickButton.gameObject.SetActive (PlayerInsideCollider ());
+		}
+
+		public void OnTriggerEnter(Collider other){
+
+			Debug.Log ("OnTriggerEnter. other: " + other.name);
+
+			if (other.tag == "Player" && IsEnabled()) {
+				EnablePickButton ();
+			}
 		}
 
 		public void HidePoiUI(){
