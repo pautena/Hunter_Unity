@@ -12,7 +12,8 @@ public class CameraToTarget : MonoBehaviour {
 	public float heightDamping = 2.0f;
 	public float rotationDamping = 3.0f;
 
-	public CameraGestures cameraGestures;
+	public CameraGestureRotate cameraGestureRotate;
+	public CameraGestureScale cameraGestureScale;
 	private Transform target;
 
 	// Update is called once per frame
@@ -56,10 +57,12 @@ public class CameraToTarget : MonoBehaviour {
 
 	public void SetTarget(Transform target){
 		this.target = target;
-		cameraGestures.enabled = false;
+		cameraGestureRotate.enabled = false;
+		cameraGestureScale.enabled = false;
 	}
 	public void RemoveTarget(){
 		this.target = null;
-		cameraGestures.enabled = true;
+		cameraGestureRotate.enabled = true;
+		cameraGestureScale.enabled = true;
 	}
 }

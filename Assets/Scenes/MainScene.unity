@@ -687,8 +687,9 @@ GameObject:
   - component: {fileID: 504905295}
   - component: {fileID: 504905294}
   - component: {fileID: 504905293}
-  - component: {fileID: 504905297}
   - component: {fileID: 504905298}
+  - component: {fileID: 504905299}
+  - component: {fileID: 504905297}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -767,18 +768,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 504905292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7b4296117d814bfd8464f008c9c0816, type: 3}
+  m_Script: {fileID: 11500000, guid: c3182d4e513144b10bf14741cc047928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1314283946}
-  distance: 10
-  minDistance: 10
-  maxDistance: 30
-  xSpeed: 2500
-  ySpeed: 200
-  scaleSpeed: 0.3
-  yMinLimit: 10
-  yMaxLimit: 45
+  perspectiveZoomSpeed: 0.5
+  orthoZoomSpeed: 0.5
+  camera: {fileID: 504905295}
+  min: 40
+  max: 120
 --- !u!114 &504905298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +791,27 @@ MonoBehaviour:
   height: 5
   heightDamping: 2
   rotationDamping: 3
-  cameraGestures: {fileID: 504905297}
+  cameraGestureRotate: {fileID: 504905299}
+  cameraGestureScale: {fileID: 504905297}
+--- !u!114 &504905299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 504905292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1d1c8ae032d4b5bad2115dddbcb782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1314283946}
+  distance: 10
+  minDistance: 10
+  maxDistance: 30
+  xSpeed: 250
+  ySpeed: 120
+  yMinLimit: 20
+  yMaxLimit: 80
 --- !u!1 &636288623
 GameObject:
   m_ObjectHideFlags: 0
