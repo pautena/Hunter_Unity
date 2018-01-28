@@ -24,6 +24,7 @@ namespace Poi{
 		public Button pickButton;
 		public Animator accomplishedAnimator;
 		public Animator ownedAnimator;
+		public float delayAccomplishedOnClick=1f;
 
 		private Mosaic mosaic;
 		private int quantity;
@@ -55,11 +56,6 @@ namespace Poi{
 			title.text = poiDescription.name;
 			description.text = poiDescription.description;
 			SetupEnable ();
-			CheckHasMosaic (mosaic, network);
-		}
-
-		private void CheckHasMosaic(Mosaic mosaic,byte network){
-			string address = user.GetAddress (network);
 		}
 
 		public void SetQuantity(int quantity){
@@ -87,7 +83,13 @@ namespace Poi{
 				embersParticleSystem.Stop ();
 			}
 			ownedAnimator.SetTrigger ("Show");
+
 		}
+
+		private void ShowAccomplishedAnimator(){
+			accomplishedAnimator.SetTrigger("Show");
+		}
+			
 
 		public void Enable(){
 			if (!embersParticleSystem.isPlaying) {
@@ -132,11 +134,15 @@ namespace Poi{
 		public void ShowPoiUI(){
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<MainUIManager> ().Hide ();
 			animator.SetTrigger ("Show");
+			if (IsOwned ()) {
+				Invoke ("ShowAccomplishedAnimator", delayAccomplishedOnClick);
+			}
+
 			SetupPickButton ();
 		}
 
 		private void SetupPickButton(){
-			pickButton.gameObject.SetActive (PlayerInsideCollider ());
+			pickButton.gameObject.SetActive (PlayerInsideCollider () && !IsOwned());
 		}
 
 		public void OnTriggerEnter(Collider other){
