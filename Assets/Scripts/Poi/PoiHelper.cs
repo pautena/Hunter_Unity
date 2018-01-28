@@ -7,6 +7,7 @@ using NemApi.Models;
 using UnityEngine.UI;
 using Models;
 using Models.Managers;
+using System;
 
 
 namespace Poi{
@@ -131,19 +132,28 @@ namespace Poi{
 		public void ShowPoiUI(){
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<MainUIManager> ().Hide ();
 			animator.SetTrigger ("Show");
-			EnablePickButton ();
+			SetupPickButton ();
 		}
 
-		private void EnablePickButton(){
+		private void SetupPickButton(){
 			pickButton.gameObject.SetActive (PlayerInsideCollider ());
 		}
 
 		public void OnTriggerEnter(Collider other){
 
-			Debug.Log ("OnTriggerEnter. other: " + other.name);
+			Debug.Log ("OnTriggerEnter. other: " + other.tag+", IsEnabled(): "+IsEnabled() );
 
 			if (other.tag == "Player" && IsEnabled()) {
-				EnablePickButton ();
+				SetupPickButton ();
+			}
+		}
+
+		public void OnTriggerExit(Collider other){
+
+			Debug.Log ("OnTriggerExit. other: " + other.tag+", IsEnabled(): "+IsEnabled() );
+
+			if (other.tag == "Player" && IsEnabled()) {
+				SetupPickButton ();
 			}
 		}
 
@@ -153,8 +163,13 @@ namespace Poi{
 		}
 
 		private bool PlayerInsideCollider(){
-			GameObject player = GameObject.FindGameObjectWithTag ("Player");
-			return player != null && poiCollider.bounds.Contains (player.transform.position);
+			try{
+				GameObject player = GameObject.FindGameObjectWithTag ("Player");
+				Collider playerCollider = player.GetComponent<Collider> ();
+				return playerCollider.bounds.Contains (transform.position);
+			}catch(NullReferenceException){
+				return false;
+			}
 		}
 
 		public void Set(Dictionary<string, object> props){
