@@ -79,6 +79,7 @@ namespace Poi{
 		}
 
 		public void Owned(){
+			Debug.Log ("owned ("+mosaic.id+") -> quantity: " + quantity+" owned: "+owned);
 			if (embersParticleSystem.isPlaying) {
 				embersParticleSystem.Stop ();
 			}
@@ -92,6 +93,7 @@ namespace Poi{
 			
 
 		public void Enable(){
+			Debug.Log ("Enable ("+mosaic.id+") -> quantity: " + quantity+" owned: "+owned);
 			if (!embersParticleSystem.isPlaying) {
 				embersParticleSystem.Play ();
 			}
@@ -99,6 +101,7 @@ namespace Poi{
 		}
 
 		public void Disable(){
+			Debug.Log ("Disble ("+mosaic.id+") -> quantity: " + quantity+" owned: "+owned);
 			if (embersParticleSystem.isPlaying) {
 				embersParticleSystem.Stop ();
 			}
